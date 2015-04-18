@@ -24,3 +24,35 @@ demoApp.config(['$routeProvider', function($routeProvider) {
     redirectTo: '/settings'
   });
 }]);
+
+$(document).ready(function(){
+    var $window = $(window);
+    var $leftColumn = $('#leftColumn');
+    var top = $leftColumn.offset().top;
+    var left = $leftColumn.offset().left;
+    var width = $leftColumn.css('width');
+    console.log($(window).width());
+    if ($(window).width() > 1024) {
+        $(document).on('scroll', function(){
+            var scrollTop = $window.scrollTop();
+            if (scrollTop >= top) {
+                //console.log($leftColumn.hasClass('fixed'));
+                if (!$leftColumn.hasClass('fixed')) {
+                    $leftColumn.css({
+                        left: left,
+                        width: width
+                    });
+                    $leftColumn.addClass('fixed');
+                }
+            } else {
+                if ($leftColumn.hasClass('fixed')) {
+                    $leftColumn.removeClass('fixed');
+                    $leftColumn.css({
+                        left:0
+                    });
+                }
+            }
+        });
+    }
+
+});

@@ -12,3 +12,18 @@ h1 {
   color: $blue;
 }
 
+.box{
+  border: 1px solid $borderColor;
+  box-shadow: 0 0 2px 0 $borderColor;
+}
+
+.inline{
+  display: inline;
+}
+.noPadding{
+  padding:0
+}
+
+.blank{
+  clear:both;
+}
