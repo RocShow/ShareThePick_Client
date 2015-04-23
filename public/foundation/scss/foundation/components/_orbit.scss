@@ -20,12 +20,12 @@ $orbit-caption-height: auto !default;
 // We use these to control the left/right nav styles
 $orbit-nav-bg: transparent !default;
 $orbit-nav-bg-hover: rgba(0,0,0,0.3) !default;
-$orbit-nav-arrow-color: $white !default;
+$orbit-nav-arrow-color: #808080 !default;
 $orbit-nav-arrow-color-hover: $white !default;
 
 // We use these to control the timer styles
 $orbit-timer-bg: rgba(255,255,255,0.3) !default;
-$orbit-timer-show-progress-bar: true !default;
+$orbit-timer-show-progress-bar: false !default;
 
 // We use these to control the bullet nav styles
 $orbit-bullet-nav-color: $iron !default;
@@ -34,7 +34,7 @@ $orbit-bullet-radius: rem-calc(9) !default;
 
 // We use these to controls the style of slide numbers
 $orbit-slide-number-bg: rgba(0,0,0,0) !default;
-$orbit-slide-number-font-color: $white !default;
+$orbit-slide-number-font-color: rgb(0,0,0) !default;
 $orbit-slide-number-padding: rem-calc(5) !default;
 
 // Graceful Loading Wrapper and preloader
@@ -75,7 +75,6 @@ $orbit-timer-hide-for-small: true !default;
         // Prevent bullets showing before .orbit-container is loaded
         list-style-type: none;
         margin: 0;
-
         // Hide all list items
         li,
         li .orbit-caption { display: none; }
@@ -88,7 +87,6 @@ $orbit-timer-hide-for-small: true !default;
 
         // Show images when .orbit-container is loaded
         li { display: block;
-
           .orbit-caption { display: block; }
         }
         .orbit-bullets li {
@@ -288,12 +286,13 @@ $orbit-timer-hide-for-small: true !default;
       }
     }
 
-    .orbit-bullets-container { text-align: center; }
+    .orbit-bullets-container { text-align: center; position:relative;}
     .orbit-bullets {
-      margin: 0 auto 30px auto;
+      margin: -19px auto 0px auto;
+      width:100%;
       overflow: hidden;
-      position: relative;
-      top: 10px;
+      position: absolute;
+      top: 0;
       float: none;
       text-align: center;
       display: block;

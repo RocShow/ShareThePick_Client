@@ -438,7 +438,7 @@
       orbit_transition_class : 'orbit-transitioning',
       bullets : true,
       circular : true,
-      timer : true,
+      timer : false,
       variable_height : false,
       swipe : true,
       before_slide_change : noop,

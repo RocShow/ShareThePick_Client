@@ -1,0 +1,108 @@
+@import url("http://fonts.googleapis.com/css?family=Bree+Serif|Merriweather");
+@import url("http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css");
+/* line 5, ../../sass/_base.scss */
+h1 {
+  font-size: 2.2rem;
+  color: #ef7e60; }
+
+/* line 10, ../../sass/_base.scss */
+.test {
+  font-size: 1.2rem;
+  color: #2176C7; }
+
+/* line 15, ../../sass/_base.scss */
+.box {
+  border: 1px solid #e95745;
+  box-shadow: 0 0 2px 0 #e95745; }
+
+/* line 20, ../../sass/_base.scss */
+.inline {
+  display: inline; }
+
+/* line 23, ../../sass/_base.scss */
+.noPadding {
+  padding: 0; }
+
+/* line 27, ../../sass/_base.scss */
+.blank {
+  clear: both; }
+
+/* line 6, ../../sass/event.scss */
+nav {
+  position: fixed; }
+
+/* line 10, ../../sass/event.scss */
+#titleSec {
+  margin-top: 40px;
+  margin-bottom: 20px; }
+  /* line 13, ../../sass/event.scss */
+  #titleSec #userProfile {
+    display: block;
+    float: left;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #e0e0e0; }
+  /* line 20, ../../sass/event.scss */
+  #titleSec #eventTitle {
+    float: left;
+    margin-left: 10px; }
+    /* line 23, ../../sass/event.scss */
+    #titleSec #eventTitle h4 {
+      margin-top: -2px;
+      margin-bottom: 0; }
+    /* line 27, ../../sass/event.scss */
+    #titleSec #eventTitle #author {
+      color: #999;
+      font-size: 12px; }
+
+/* line 36, ../../sass/event.scss */
+#detailSec #leftColumn #eventDescription {
+  font-size: 12px;
+  height: 62px;
+  margin-bottom: 10px; }
+/* line 41, ../../sass/event.scss */
+#detailSec #leftColumn #map-canvas {
+  margin-bottom: 30px;
+  height: 228px; }
+/* line 46, ../../sass/event.scss */
+#detailSec #rightColumn {
+  padding-left: 40px; }
+  /* line 48, ../../sass/event.scss */
+  #detailSec #rightColumn #people {
+    margin-top: -10px;
+    border-bottom: 1px solid #e95745; }
+    /* line 51, ../../sass/event.scss */
+    #detailSec #rightColumn #people ul.slide {
+      margin: 0 auto;
+      width: 90%; }
+      /* line 54, ../../sass/event.scss */
+      #detailSec #rightColumn #people ul.slide li {
+        padding-top: 10px;
+        padding-bottom: 10px; }
+        /* line 57, ../../sass/event.scss */
+        #detailSec #rightColumn #people ul.slide li img {
+          border: 2px solid #e95745;
+          border-radius: 50%; }
+  /* line 64, ../../sass/event.scss */
+  #detailSec #rightColumn #pics {
+    border-top: 10px;
+    padding-top: 7px; }
+    /* line 67, ../../sass/event.scss */
+    #detailSec #rightColumn #pics #imgs {
+      max-width: 560px;
+      margin: 0 auto; }
+      /* line 70, ../../sass/event.scss */
+      #detailSec #rightColumn #pics #imgs img {
+        width: 70px;
+        height: 70px;
+        border: 2px solid #e95745;
+        margin: 3px 3px; }
+    /* line 78, ../../sass/event.scss */
+    #detailSec #rightColumn #pics #pages ul {
+      margin-bottom: 0; }
+    /* line 81, ../../sass/event.scss */
+    #detailSec #rightColumn #pics #pages li {
+      margin-left: 0; }
+    /* line 84, ../../sass/event.scss */
+    #detailSec #rightColumn #pics #pages a {
+      font-size: 10px; }

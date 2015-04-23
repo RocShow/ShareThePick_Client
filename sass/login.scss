@@ -1,0 +1,8 @@
+@import "variables";
+@import "mixins";
+@import "base";
+
+body{
+  background: url("./images/bg.jpg");
+  background-size: 100% 100%;
+}

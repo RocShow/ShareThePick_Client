@@ -16,7 +16,8 @@ module.exports = function(grunt) {
           'public/js/script.js': ['js/script.js'],
           'public/js/controllers.js': ['js/controllers.js'],
           'public/js/app.js': ['js/app.js'],
-          'public/js/services.js': ['js/services.js']
+          'public/js/services.js': ['js/services.js'],
+	  'public/event/app.js':['js/event/app.js']
         } //files
       } //my_target
     }, //uglify
@@ -26,7 +27,8 @@ module.exports = function(grunt) {
             dest   : 'public/js',
             cwd    : 'js',
             src    : [
-              '**/*.js'
+              '**/*.js',
+	      '**/event/*.js'
             ]
       }
     },
@@ -46,7 +48,7 @@ module.exports = function(grunt) {
     watch: {
       options: { livereload: true },
       scripts: {
-        files: ['js/*.js'],
+        files: ['js/*.js', 'js/event/*.js'],
         //tasks: ['clean','uglify'],
         tasks: ['copy']
       }, //script
@@ -55,7 +57,7 @@ module.exports = function(grunt) {
         tasks: ['compass:dev','compass:foundation']
       }, //sass
       sass_foundation: {
-        files: ['public/foundation/scss/foundation.scss','public/foundation/scss/foundation/*.scss','public/foundation/scss/foundation/components/*.scss'],
+        files: ['public/foundation/scss/foundation.scss','public/foundation/scss/foundation/*.scss','public/foundation/scss/foundation/components/*.scss', 'public/foundation/js/foundation/*.js'],
         tasks: ['compass:foundation']
       }, //sass_foundation
       html: {

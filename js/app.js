@@ -26,10 +26,13 @@ demoApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 $(document).ready(function(){
+    $(document).foundation();
     var $window = $(window);
     var $leftColumn = $('#leftColumn');
     var top = $leftColumn.offset().top;
     var left = $leftColumn.offset().left;
+    console.log(top);
+    console.log($('#rightColumn').offset().top);
     var width = $leftColumn.css('width');
     console.log($(window).width());
     if ($(window).width() > 1024) {

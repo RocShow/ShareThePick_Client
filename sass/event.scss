@@ -1,0 +1,92 @@
+@import "variables";
+@import "mixins";
+@import "base";
+
+
+nav{
+  position:fixed;
+}
+
+#titleSec{
+  margin-top: 40px;
+  margin-bottom: 20px;
+  #userProfile{
+    display:block;
+    float:left;
+    width:50px;
+    height:50px;
+    border:2px solid #e0e0e0;
+  }
+  #eventTitle{
+    float:left;
+    margin-left: 10px;
+    h4{
+      margin-top:-2px;
+      margin-bottom: 0;
+    }
+    #author{
+      color:#999;
+      font-size: 12px;
+    }
+  }
+}
+
+#detailSec{
+  #leftColumn{
+    #eventDescription{
+      font-size:12px;
+      height:62px;
+      margin-bottom: 10px;
+    }
+    #map-canvas{
+      margin-bottom: 30px;
+      height:228px;
+    }
+  }
+  #rightColumn{
+    padding-left: 40px;
+    #people{
+      margin-top: -10px;
+      border-bottom: 1px solid $borderColor;
+      ul.slide{
+        margin:0 auto;
+        width: 90%;
+        li{
+          padding-top: 10px;
+          padding-bottom: 10px;
+          img{
+            border: 2px solid $borderColor;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+    #pics{
+      border-top: 10px;
+      padding-top: 7px;
+      #imgs{
+        max-width: 560px;
+        margin: 0 auto;
+        img{
+          width:70px;
+          height:70px;
+          border: 2px solid $borderColor;
+          margin:3px 3px;
+        }
+      }
+      #pages{
+        ul{
+          margin-bottom: 0;
+        }
+        li{
+          margin-left: 0;
+        }
+        a{
+          font-size: 10px;
+        }
+      }
+
+    }
+  }
+
+}
