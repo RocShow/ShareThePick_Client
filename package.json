@@ -6,6 +6,7 @@
     "biplabdeka <biplab.deka@gmail.com>"
   ],
   "dependencies": {
+    "angular-file-upload-shim": "^1.6.4",
     "express": "^4.11.1",
     "grunt": "~0.4.2",
     "grunt-contrib-clean": "^0.6.0",

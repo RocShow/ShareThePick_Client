@@ -106,3 +106,11 @@ nav {
     /* line 84, ../../sass/event.scss */
     #detailSec #rightColumn #pics #pages a {
       font-size: 10px; }
+
+/* line 94, ../../sass/event.scss */
+#upload .progress {
+  height: 30px;
+  text-align: center; }
+  /* line 97, ../../sass/event.scss */
+  #upload .progress span.meter {
+    overflow: hidden; }

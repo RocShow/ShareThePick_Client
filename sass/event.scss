@@ -88,5 +88,14 @@ nav{
 
     }
   }
+}
 
+#upload{
+  .progress{
+    height:30px;
+    text-align: center;
+    span.meter{
+      overflow: hidden;
+    }
+  }
 }

@@ -23,7 +23,7 @@ $(document).ready(function () {
         var p = data.results[0].geometry.location
         var latlng = new google.maps.LatLng(p.lat, p.lng);
         var myOptions = {
-            zoom: 17,
+            zoom: 3,
             center: latlng,
         };
         map = new google.maps.Map($('#map-canvas')[0], myOptions);
@@ -33,5 +33,37 @@ $(document).ready(function () {
         });
 
     });
+
+    $('#uploadButton').on('click', function(){
+        $('#upload')
+            .html("")
+            .append($('<h2>Uploading 5 photos...</h2>'))
+            .append(createProgressBar('File Name 1', 0.1))
+            .append(createProgressBar('File Name 2', 0.2))
+            .append(createProgressBar('File Name 3', 0.3))
+            .append(createProgressBar('File Name 4', 0.4))
+            .append(createProgressBar('File Name 5', 0.5))
+            .append($('<a class="close-reveal-modal" aria-label="Close">&#215;</a>'));
+    })
+    function createProgressBar(fileName, speed){
+        var bar = $('<div class="progress alert"><span class="meter" style="width:0%">'+fileName+'</span></div>');
+        increaseProgress(bar, speed);
+        return bar;
+
+    }
+
+    function increaseProgress($ele, speed){
+        var $span = $ele.find('span');
+        var width = $span.css('width').split('%')[0];
+        var interval = setInterval(function(){
+            width = Number(width) + speed;
+            if (width >= 100){
+                $ele.removeClass('alert');
+                $ele.addClass('success');
+                clearInterval(interval);
+            }
+            $span.css('width', width + '%');
+        }, 10);
+    }
 
 });
