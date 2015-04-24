@@ -89,28 +89,27 @@ nav {
     padding-top: 7px; }
     /* line 67, ../../sass/event.scss */
     #detailSec #rightColumn #pics #imgs {
-      max-width: 560px;
       margin: 0 auto; }
-      /* line 70, ../../sass/event.scss */
+      /* line 69, ../../sass/event.scss */
       #detailSec #rightColumn #pics #imgs img {
-        width: 70px;
-        height: 70px;
+        width: 110px;
+        height: 110px;
         border: 2px solid #e95745;
         margin: 3px 3px; }
-    /* line 78, ../../sass/event.scss */
+    /* line 77, ../../sass/event.scss */
     #detailSec #rightColumn #pics #pages ul {
       margin-bottom: 0; }
-    /* line 81, ../../sass/event.scss */
+    /* line 80, ../../sass/event.scss */
     #detailSec #rightColumn #pics #pages li {
       margin-left: 0; }
-    /* line 84, ../../sass/event.scss */
+    /* line 83, ../../sass/event.scss */
     #detailSec #rightColumn #pics #pages a {
       font-size: 10px; }
 
-/* line 94, ../../sass/event.scss */
+/* line 93, ../../sass/event.scss */
 #upload .progress {
   height: 30px;
   text-align: center; }
-  /* line 97, ../../sass/event.scss */
+  /* line 96, ../../sass/event.scss */
   #upload .progress span.meter {
     overflow: hidden; }
