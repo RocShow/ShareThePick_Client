@@ -98,3 +98,67 @@ nav{
     }
   }
 }
+
+#images{
+  .orbit-container {
+    min-height: 375px;
+  }
+}
+
+#imageModal{
+  .reveal-modal{
+    width:auto;
+  }
+}
+
+.imageInfo img {
+        float:left;
+        width:50px;
+        height:50px;
+        border:3px solid $borderColor;
+        border-radius:10px
+
+}
+
+.comments{
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
+.clearfix:after {
+        visibility:hidden;
+        display:block;
+        font-size:0;
+        content: ".";
+        clear:both;
+        height:0;
+        
+}
+.clearfix {
+        display: inline-block;
+}
+* html .clearfix {
+        height: 1%;
+}
+.comment img {
+        float:left;
+        width:50px;
+        height:50px;
+        border:3px solid $borderColor;
+        border-radius:10px
+
+}
+.comment-content {
+        position:relative;
+        float:left;
+        margin-left:12px;
+        width:400px;
+        padding:0px 20px;
+        border-radius:10px;
+        background-color:#FFFFFF;
+        box-shadow:1px 1px 5px rgba(0,0,0,.2);
+}
+
+.comment {
+        margin-top:20px;
+}
