@@ -12,7 +12,7 @@ demoControllers.controller('loginController', function($scope, $rootScope, $http
             .success(function(user){
                 //no error: authentication OK
                 $rootScope.message = 'Authentication successful';
-                $location.url('/auth/profile');
+                $location.url('/auth/getUser');
             })
             .error(function(){
                 $rootscope.message = 'Authentication failed';
