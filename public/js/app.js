@@ -8,7 +8,7 @@ demoApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/login-2.html',
     controller: 'loginController'
   }).
-  when('/auth/profile', {
+  when('/auth/getUser', {
     templateUrl: 'partials/user.html',
     controller: 'profileController',
     resolve: {
@@ -28,7 +28,7 @@ demoApp.config(['$routeProvider', function($routeProvider) {
     controller: 'LlamaListController'
   }).
   otherwise({
-    redirectTo: '/login'
+    redirectTo: '/auth/login'
   });
 }]);
 
@@ -38,7 +38,7 @@ demoApp.config(function($locationProvider, $httpProvider){
         var deferred = $q.defer();
 
         //Make an AJAX call to check if the user is logged in
-        $http.get('/auth/profile').success(function(user){
+        $http.get('/auth/getUser').success(function(user){
             //authenticated
             if (user)
                 deferred.resolve();

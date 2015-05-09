@@ -5,18 +5,18 @@ demoControllers.controller('loginController', function($scope, $rootScope, $http
 
     //register the login() function used in form
     $scope.login = function(){
-        $http.post('/auth/login',{
+        $http.post('/login',{
             email: $scope.user.email,
             password: $scope.user.password
         })
             .success(function(user){
                 //no error: authentication OK
                 $rootScope.message = 'Authentication successful';
-                $location.url('/auth/getUser');
+                $location.url('/getUser');
             })
             .error(function(){
                 $rootscope.message = 'Authentication failed';
-                $location.url('/auth/login');
+                $location.url('/login');
             })
     };
 

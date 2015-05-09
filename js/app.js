@@ -4,11 +4,11 @@ var demoApp = angular.module('demoApp', ['ngRoute', 'demoControllers', 'demoServ
 
 demoApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-    when('/auth/login', {
+    when('/login', {
     templateUrl: 'partials/login-2.html',
     controller: 'loginController'
   }).
-  when('/auth/getUser', {
+  when('/getUser', {
     templateUrl: 'partials/user.html',
     controller: 'profileController',
     resolve: {
@@ -28,7 +28,7 @@ demoApp.config(['$routeProvider', function($routeProvider) {
     controller: 'LlamaListController'
   }).
   otherwise({
-    redirectTo: '/login'
+    redirectTo: '/auth/login'
   });
 }]);
 
@@ -38,7 +38,7 @@ demoApp.config(function($locationProvider, $httpProvider){
         var deferred = $q.defer();
 
         //Make an AJAX call to check if the user is logged in
-        $http.get('/auth/getUser').success(function(user){
+        $http.get('/getUser').success(function(user){
             //authenticated
             if (user)
                 deferred.resolve();
@@ -46,7 +46,7 @@ demoApp.config(function($locationProvider, $httpProvider){
             else {
                 $rootScope.message = "You need to log in";
                 deferred.reject();
-                $location.url('/auth/login')
+                $location.url('/login')
             }
         });
         return deferred.promise;
