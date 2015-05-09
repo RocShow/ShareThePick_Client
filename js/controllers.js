@@ -1,6 +1,33 @@
 var demoControllers = angular.module('demoControllers', []);
 
-demoControllers.controller('FirstController', ['$scope', 'CommonData'  , function($scope, CommonData) {
+demoControllers.controller('loginController', function($scope, $rootScope, $http, $location){
+    $scope.user = {};
+
+    //register the login() function used in form
+    $scope.login = function(){
+        $http.post('/auth/login',{
+            email: $scope.user.email,
+            password: $scope.user.password
+        })
+            .success(function(user){
+                //no error: authentication OK
+                $rootScope.message = 'Authentication successful';
+                $location.url('/auth/profile');
+            })
+            .error(function(){
+                $rootscope.message = 'Authentication failed';
+                $location.url('/auth/login');
+            })
+    };
+
+});
+
+demoControllers.controller('profileController', function(){
+
+});
+
+
+/*demoControllers.controller('FirstController', ['$scope', 'CommonData'  , function($scope, CommonData) {
   $scope.data = "";
    $scope.displayText = ""
 
@@ -41,6 +68,5 @@ demoControllers.controller('SettingsController', ['$scope' , '$window' , functio
 
   };
 
-}]);
-
+}]);*/
 
