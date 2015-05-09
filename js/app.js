@@ -4,11 +4,11 @@ var demoApp = angular.module('demoApp', ['ngRoute', 'demoControllers', 'demoServ
 
 demoApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-    when('/login', {
+    when('/auth/login', {
     templateUrl: 'partials/login-2.html',
     controller: 'loginController'
   }).
-  when('/profile', {
+  when('/auth/profile', {
     templateUrl: 'partials/user.html',
     controller: 'profileController',
     resolve: {
