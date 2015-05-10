@@ -110,13 +110,13 @@ settingApp.controller('changeInfo', ['$scope', 'CommonData', 'Upload', '$locatio
     $scope.update = function(){
         dataService.getUser(id, function(old){
             if (old.data){
-                old.data.description = $scope.description;
-                console.log(old.data);
+                old.data.description = $scope.data.description;
+                //console.log(old.data);
                 dataService.updateUser(id, old.data, function(ret,status){
                     if (status >= 200 && status < 300){
                         utils.alert('#changePersonalInfo', 'Successfully updated!', 'success');
-                        console.log(ret);
-                        //window.location.reload();
+                        //console.log(ret);
+                        window.location.reload();
                     } else {
                         utils.alert('#changePersonalInfo', ret.message, 'alert');
                     }
