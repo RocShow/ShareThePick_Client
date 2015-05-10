@@ -1,5 +1,6 @@
 @import url("http://fonts.googleapis.com/css?family=Bree+Serif|Merriweather");
 @import url("http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css");
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,800");
 /* line 5, ../../sass/_base.scss */
 h1 {
   font-size: 2.2rem;
@@ -27,7 +28,43 @@ h1 {
 .blank {
   clear: both; }
 
-/* line 5, ../../sass/login.scss */
+/* line 21, ../../sass/login.scss */
 body {
   background: url("./images/bg.jpg");
   background-size: 100% 100%; }
+  /* line 24, ../../sass/login.scss */
+  body #title {
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: 50px;
+    font-weight: 800;
+    color: #f04124;
+    margin-top: 20px; }
+  /* line 31, ../../sass/login.scss */
+  body #login {
+    margin-top: 40px; }
+    /* line 33, ../../sass/login.scss */
+    body #login input {
+      background: transparent;
+      border: none;
+      outline: none;
+      -webkit-box-shadow: rgba(0, 0, 0, 0.09804) 0px 0px 0px 0px inset;
+      border-bottom: 1px solid black;
+      color: black;
+      font-size: 17px; }
+    /* line 42, ../../sass/login.scss */
+    body #login input:focus {
+      outline: 0; }
+    /* line 7, ../../sass/login.scss */
+    body #login input::-webkit-input-placeholder {
+      color: #707070; }
+    /* line 10, ../../sass/login.scss */
+    body #login input:-moz-placeholder {
+      /* Firefox 18- */
+      color: #707070; }
+    /* line 13, ../../sass/login.scss */
+    body #login input::-moz-placeholder {
+      /* Firefox 19+ */
+      color: #707070; }
+    /* line 16, ../../sass/login.scss */
+    body #login input:-ms-input-placeholder {
+      color: #707070; }

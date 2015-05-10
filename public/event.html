@@ -1,29 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="eventApp">
 <head>
     <meta charset="UTF-8">
-    <title>User HomePage</title>
-    <script src="./lib/angular/angular.js"></script>
-    <script src="./lib/angular-route/angular-route.min.js"></script>
+    <title>EventPage</title>
 
     <script src="./lib/jquery-2.1.3.min/index.js"></script>
+    <script src="./foundation/js/vendor/modernizr.js"></script>
     <script src="./foundation/js/foundation.min.js"></script>
-    <script src="./js/event/app.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_IqDjU8UG2LfvIwh9PYauFzpAtRqt6W8"></script>
 
-    <link rel="stylesheet" href="./foundation/css/foundation.css">
+    <script src="./js/photoswipe.js"></script>
+    <script src="./js/photoswipe-ui-default.js"></script>
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script src="./lib/angular/angular.js"></script>
+    <script src="./lib/angular-route/angular-route.js"></script>
+    <script src="./js/ngAutocomplete.js"></script>
+    <script src="./lib/angular-mass-autocomplete/massautocomplete.js"></script>
+    <script src="./lib/angularjs-datepicker/src/js/angular-datepicker.js"></script>
+    <script src="./lib/ng-file-upload/ng-file-upload-shim.js"></script>
+    <script src="./lib/ng-file-upload/ng-file-upload.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.js"></script>
+
+    <script src="./js/event/app.js"></script>
+    <script src="./js/dataService.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/event/script.js"></script>
+
     <link rel="stylesheet" href="./css/event.css">
+    <link rel="stylesheet" href="./foundation/css/foundation.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./lib/angular-mass-autocomplete/massautocomplete.theme.css"/>
+    <link rel="stylesheet" href="./lib/angularjs-datepicker/src/css/angular-datepicker.css"/>
+    <link rel="stylesheet" href="./css/photoswipe.css"/>
+    <link rel="stylesheet" href="./css/default-skin.css"/>
+
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
-<body>
+<body ng-controller="event">
 <div id="fb-root"></div>
 
-<div class="fixed">
+<div class="fixed" ng-controller="nav">
     <nav class="top-bar" data-topbar role="navigation">
         <ul class="title-area">
             <li class="name">
-                <h1><a href="#">My Site</a></h1>
+                <h1><a href="#">ShareThePik</a></h1>
             </li>
             <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
             <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -32,19 +52,9 @@
         <section class="top-bar-section">
             <!-- Right Nav Section -->
             <ul class="right">
-                <li class="active"><a href="#">Right Button Active</a></li>
-                <li class="has-dropdown">
-                    <a href="#">Right Button Dropdown</a>
-                    <ul class="dropdown">
-                        <li><a href="#">First link in dropdown</a></li>
-                        <li class="active"><a href="#">Active link in dropdown</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <!-- Left Nav Section -->
-            <ul class="left">
-                <li><a href="#">Left Nav Button</a></li>
+                <li ><a ng-href="/user.html?id={{me._id}}">HomePage</a></li>
+                <li ><a ng-href="/setting.html?id={{me._id}}">Setting</a></li>
+                <li ><a ng-click="logout()">Logout</a></li>
             </ul>
         </section>
     </nav>
@@ -52,295 +62,168 @@
 
 <section class="row" id="titleSec">
     <div class="columns small-8 noPadding">
-        <img src="./css/images/eventPic2.jpg" id="userProfile"/>
+        <img ng-src="{{logo.src}}" id="eventProfile"/>
         <div id="eventTitle">
-            <h4><a href="#">CS498 Prototype Presentation</a></h4>
-            <div id="author">Created by <a href="#">Xiupeng Ma</a> on 04/22/2015 | <b>10</b> People | <b>20</b> Photos</div>
+            <h4><a href="#">{{event.name}}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a ng-show="canEdit" data-reveal-id="eventEditModal"><i class="fa fa-pencil-square-o"></i></a></h4>
+            <div id="author">Created by <a ng-href="/user.html?id={{creater._id}}">{{creater.name}}</a> on {{event.date.toLocaleDateString()}} | <b>{{peopleCount}}</b> People | <b>{{photos.length}}</b> Photos</div>
         </div>
         <div class="blank"></div>
     </div>
     <div class="columns small-4 text-right">
-        G F
+
     </div>
 </section>
 
 <section class="row" id="detailSec">
-    <div class="columns small-12" id="leftColumn">
+    <div class="columns small-12 large-6" id="leftColumn">
         <div class="row">
-            <div class="columns small-12 large-6" id="eventDescription">
-                Description to the event.Description to the event.Description to the event.Description to the event.Description to the event.
+            <div class="columns small-12 large-12" id="eventDescription">
+                {{event.description}}
             </div>
-            <div class="columns small-12 large-6" id="map-canvas">
-        </div>
-
-
+            <div class="columns small-11 large-11 left" id="map-canvas"></div>
         </div>
     </div>
-    <div class="columns small-12" id="rightColumn">
+    <div class="columns small-12 large-6" id="rightColumn">
         <div id="people">
             <ul class="example-orbit-content" data-orbit>
-                <li>
-                    <ul class="small-block-grid-11 slide">
-                        <li><img src="./css/images/profile.jpeg"/></li>
-                        <li><img src="./css/images/profile1.jpeg"/></li>
-                        <li><img src="./css/images/profile2.jpeg"/></li>
-                        <li><img src="./css/images/profile3.jpeg"/></li>
-                        <li><img src="./css/images/profile4.jpeg"/></li>
-                        <li><img src="./css/images/profile5.jpeg"/></li>
-                        <li><img src="./css/images/profile6.jpeg"/></li>
-                        <li><img src="./css/images/plus.png"/></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="small-block-grid-11 slide">
-                        <li><img src="./css/images/profile.jpeg"/></li>
-                        <li><img src="./css/images/profile1.jpeg"/></li>
-                        <li><img src="./css/images/profile2.jpeg"/></li>
-                        <li><img src="./css/images/profile3.jpeg"/></li>
-                        <li><img src="./css/images/profile4.jpeg"/></li>
-                        <li><img src="./css/images/profile5.jpeg"/></li>
-                        <li><img src="./css/images/profile6.jpeg"/></li>
-                        <li><img src="./css/images/plus.png"/></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="small-block-grid-11 slide">
-                        <li><img src="./css/images/profile.jpeg"/></li>
-                        <li><img src="./css/images/profile1.jpeg"/></li>
-                        <li><img src="./css/images/profile2.jpeg"/></li>
-                        <li><img src="./css/images/profile3.jpeg"/></li>
-                        <li><img src="./css/images/profile4.jpeg"/></li>
-                        <li><img src="./css/images/profile5.jpeg"/></li>
-                        <li><img src="./css/images/profile6.jpeg"/></li>
-                        <li><img src="./css/images/plus.png"/></li>
+                <li ng-repeat="group in list_user_id">
+                    <ul class="small-block-grid-5 slide">
+                        <li ng-repeat="user in group">
+                            <a ng-href="/user.html?id={{user._id}}">
+                                <img ng-src="{{user.profileUrl}}"/>
+                            </a>
+                            <div class="deleteIcon">
+                                <img src="./css/images/deleteIcon.png" ng-click="removeUser(user._id)"/>
+                            </div>
+                        </li>
+                        <li ng-show="canEdit"><a><img src="./css/images/plus.png" data-reveal-id="addUserModal"/></a></li>
                     </ul>
                 </li>
             </ul>
-
         </div>
+
         <div class="row" id="pics">
             <div id="imgs">
-                <a data-reveal-id="imageModal" data-orbit-link="image1" ><img src="./css/images/eventPic1.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image2" ><img src="./css/images/eventPic2.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image3" ><img src="./css/images/eventPic3.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image4"><img src="./css/images/eventPic4.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image5"><img src="./css/images/eventPic5.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image6"><img src="./css/images/eventPic6.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image7"><img src="./css/images/eventPic7.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image8"><img src="./css/images/eventPic8.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image9"><img src="./css/images/eventPic9.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image10"><img src="./css/images/eventPic10.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image11"><img src="./css/images/eventPic11.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image12"><img src="./css/images/eventPic12.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image13"><img src="./css/images/eventPic13.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image14"><img src="./css/images/eventPic14.jpeg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image15"><img src="./css/images/eventPic15.jpg"/></a>
-                <a data-reveal-id="imageModal" data-orbit-link="image16"><img src="./css/images/eventPic16.jpg"/></a>
+                <a ng-repeat = "img in photos">
+                    <img ng-src="{{img.src}}" ng-click="showImage($index)"/>
+                    <div class="deleteIcon">
+                        <img src="./css/images/deleteIcon.png" ng-click="deleteImage($index)"/>
+                    </div>
+                </a>
 
-
-                <a data-reveal-id="upload" id="uploadButton" ><img src="./css/images/plus.png"/></a>
+                <a id="uploadButton" ngf-select ngf-multiple="true" ng-model="files" ng-show="canEdit"><img src="./css/images/plus.png"/></a>
             </div>
-            <div class="pagination-centered" id="pages">
-                <ul class="pagination" role="menubar" aria-label="Pagination">
-                    <li class="arrow unavailable" aria-disabled="true"><a href="">&laquo; Previous</a></li>
-                    <li class="current"><a href="">1</a></li>
-                    <li><a href="">2</a></li>
-                    <li><a href="">3</a></li>
-                    <li><a href="">4</a></li>
-                    <li class="unavailable" aria-disabled="true"><a href="">&hellip;</a></li>
-                    <li><a href="">12</a></li>
-                    <li><a href="">13</a></li>
-                    <li class="arrow"><a href="">Next &raquo;</a></li>
-                </ul>
+
+            <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                <!-- Background of PhotoSwipe.
+                     It's a separate element as animating opacity is faster than rgba(). -->
+                <div class="pswp__bg"></div>
+                <!-- Slides wrapper with overflow:hidden. -->
+                <div class="pswp__scroll-wrap">
+                    <!-- Container that holds slides.
+                        PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                        Don't modify these 3 pswp__item elements, data is added later on. -->
+                    <div class="pswp__container">
+                        <div class="pswp__item"></div>
+                        <div class="pswp__item"></div>
+                        <div class="pswp__item"></div>
+                    </div>
+                    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+                    <div class="pswp__ui pswp__ui--hidden">
+                        <div class="pswp__top-bar">
+                            <!--  Controls are self-explanatory. Order can be changed. -->
+                            <div class="pswp__counter"></div>
+                            <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                            <button class="pswp__button pswp__button--share" title="Share"></button>
+                            <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                            <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                            <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                            <!-- element will get class pswp__preloader--active when preloader is running -->
+                            <div class="pswp__preloader">
+                                <div class="pswp__preloader__icn">
+                                    <div class="pswp__preloader__cut">
+                                        <div class="pswp__preloader__donut"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                            <div class="pswp__share-tooltip"></div>
+                        </div>
+                        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                        </button>
+                        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                        </button>
+                        <div class="pswp__caption">
+                            <div class="pswp__caption__center"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>
 </section>
-<div id="upload" class="reveal-modal small" data-reveal aria-labelledby="Sign Up" aria-hidden="true" role="dialog">
-    <div class="progress success">
-        <span class="meter" id="file1" style="width:0%">File Name 1</span>
-    </div>
-    <div class="progress success">
-        <span class="meter" id="file2" style="width:0%">File Name 2</span>
-    </div>
-    <div class="progress success">
-        <span class="meter" id="file3" style="width:0%">File Name 3</span>
-    </div>
-    <div class="progress success">
-        <span class="meter" id="file4" style="width:0%">File Name 4</span>
-    </div>
-    <div class="progress success">
-        <span class="meter" id="file5" style="width:0%">File Name 5</span>
-    </div>
+<div id="uploadModal" class="reveal-modal small" data-reveal aria-hidden="true" role="dialog">
     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
 
-<div id="imageModal" class="reveal-modal large" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-   <div id = "images"> 
-        <ul data-orbit>
-            <li data-orbit-slide = "image1">
-                <div class = "imageContent">
-                    <img src="./css/images/eventPic1.jpg" alt="slide 1" />
-                    <div class = "row imageInfo">
-                        <div class ="small-1 columns">
-                            <img src="./css/images/profile.jpeg"/>
-                        </div> 
-                        <div class ="small-11 columns">   
-                            <h4>Xiupeng Ma</h4>
-                            <h>Uploaded on 4/22/2015</h></br>
-                            <i class="fa fa-heart">20</i>
-                            <i class="fa fa-comment">10</i>
-                        </div>    
-                    </div> 
-                     <p>Description of the Image</p> 
-                    
-                    <div class = "comments"> 
-                        <div class = "commentbox">
-                            <div class="comment clearfix">
-                                <img src="./css/images/profile2.jpeg"/>
-                                <div class="comment-content">
-                                    <p>Comment</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class = "commentbox">
-                            <div class="comment clearfix">
-                                <img src="./css/images/profile2.jpeg"/>
-                                <div class="comment-content">
-                                    <p>Comment</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class = "commentbox">
-                            <div class="comment clearfix">
-                                <img src="./css/images/profile2.jpeg"/>
-                                <div class="comment-content">
-                                    <p>Comment</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class = "commentbox">
-                            <div class="comment clearfix">
-                                <img src="./css/images/profile2.jpeg"/>
-                                <div class="comment-content">
-                                    <p>Comment</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class = "commentbox">
-                            <div class="comment clearfix">
-                                <img src="./css/images/profile2.jpeg"/>
-                                <div class="comment-content">
-                                    <p>Comment</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>    
-                </div>
-            </li>
-            <li data-orbit-slide = "image2">
-                <div class = "imageContent">
-                    <img src="./css/images/eventPic1.jpg" alt="slide 1" />
-                    <div class = "row imageInfo">
-                        <div class ="small-1 columns">
-                            <img src="./css/images/profile.jpeg"/>
-                        </div> 
-                        <div class ="small-11 columns">   
-                            <h4>Xiupeng Ma</h4>
-                            <h>Uploaded on 4/22/2015</h></br>
-                            <i class="fa fa-heart">20</i>
-                            <i class="fa fa-comment">10</i>
-                        </div>    
-                    </div> 
-                     <p>Description of the Image</p> 
-                    <div class = "comments"> 
-                        <div class = "commentbox">
-                            <div class="comment clearfix">
-                                <img src="./css/images/profile2.jpeg"/>
-                                <div class="comment-content">
-                                    <p>Comment</p>
-                                </div>
-                            </div>    
-                        </div>
-                        <div class = "commentbox">
-                            <div class="comment clearfix">
-                                <img src="./css/images/profile2.jpeg"/>
-                                    <div class="comment-content">
-                                        <p>Comment</p>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class = "commentbox">
-                            <div class="comment clearfix">
-                                <img src="./css/images/profile2.jpeg"/>
-                                <div class="comment-content">
-                                    <p>Comment</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class = "commentbox">
-                            <div class="comment clearfix">
-                                <img src="./css/images/profile2.jpeg"/>
-                                <div class="comment-content">
-                                    <p>Comment</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class = "commentbox">
-                            <div class="comment clearfix">
-                                <img src="./css/images/profile2.jpeg"/>
-                                <div class="comment-content">
-                                    <p>Comment</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </li>
-            <li data-orbit-slide = "image3">
-                <img src="./css/images/eventPic3.jpg" alt="slide 3" />
-            </li>
-            <li data-orbit-slide = "image4">
-                <img src="./css/images/eventPic4.jpg" alt="slide 4" />
-            </li>
-            <li data-orbit-slide = "image5">
-                <img src="./css/images/eventPic5.jpg" alt="slide 5" />
-            </li>
-            <li data-orbit-slide = "image6">
-                <img src="./css/images/eventPic6.jpg" alt="slide 6" />
-            </li>
-            <li data-orbit-slide = "image7">
-                <img src="./css/images/eventPic7.jpg" alt="slide 7" />
-            </li>
-            <li data-orbit-slide = "image8">
-                <img src="./css/images/eventPic8.jpg" alt="slide 8" />
-            </li>
-            <li data-orbit-slide = "image9">
-                <img src="./css/images/eventPic9.jpg" alt="slide 9" />
-            </li>
-            <li data-orbit-slide = "image10">
-                <img src="./css/images/eventPic10.jpg" alt="slide 10" />
-            </li>
-            <li data-orbit-slide = "image11">
-                <img src="./css/images/eventPic11.jpg" alt="slide 11" />
-            </li>
-            <li data-orbit-slide = "image12">
-                <img src="./css/images/eventPic12.jpg" alt="slide 12" />
-            </li>
-            <li data-orbit-slide = "image13">
-                <img src="./css/images/eventPic13.jpg" alt="slide 13" />
-            </li>
-            <li data-orbit-slide = "image14">
-                <img src="./css/images/eventPic14.jpeg" alt="slide 14" />
-            </li>
-            <li data-orbit-slide = "image15">
-                <img src="./css/images/eventPic15.jpg" alt="slide 15" />
-            </li>
-            <li data-orbit-slide = "image16">
-                <img src="./css/images/eventPic16.jpg" alt="slide 16" />
-            </li>
-        </ul>                
-        <a class="close-reveal-modal">&#215;</a>
-    </div>    
+<div id="addUserModal" class="reveal-modal medium" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h2>Update the event info...</h2>
+    <div class="row collapse">
+        <div class="small-3 large-2 columns">
+            <span class="prefix">User's Name:</span>
+        </div>
+        <div class="small-9 large-10 columns">
+            <div mass-autocomplete id="acContainer">
+                <input type="text" placeholder="Who were in this event..." ng-model="addUserData.value" mass-autocomplete-item="ac_option_delimited">
+            </div>
+        </div>
+    </div>
+
+    <ul class="button-group even-2 columns small-12 medium-5 right" style="padding-right:0px;">
+        <li><a class="button tiny alert" ng-click="addUser()">Add User</a></li>
+        <li><a class="button tiny alert" ng-click="cancelAddUser()">Cancel</a></li>
+    </ul>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
+<div id="eventEditModal" class="reveal-modal medium" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h2>Update the event info...</h2>
+    <div class="row collapse">
+        <div class="small-3 large-2 columns">
+            <span class="prefix">Name:</span>
+        </div>
+        <div class="small-9 large-10 columns">
+            <input type="text" ng-model="editEvent.name">
+        </div>
+    </div>
+    <div class="row collapse">
+        <div class="small-3 large-2 columns">
+            <span class="prefix">Location:</span>
+        </div>
+        <div class="small-9 large-10 columns">
+            <input type="text" ng-autocomplete options="options" details="details" ng-model="editEvent.location">
+        </div>
+    </div>
+    <div class="row collapse">
+        <div class="small-3 large-2 columns">
+            <span class="prefix">Date:</span>
+        </div>
+        <div class="small-9 large-10 columns">
+            <input type="text" ng-model="editEvent.start_date">
+        </div>
+    </div>
+    Description:
+    <textarea type="text" ng-model="editEvent.description"></textarea>
+    <ul class="button-group even-2 columns small-12 medium-5 right" style="padding-right:0px;">
+        <li><a class="button tiny alert" ng-click="updateEvent()">Update</a></li>
+        <li><a class="button tiny alert" ng-click="cancelUpdate()">Cancel</a></li>
+    </ul>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
 <script src="http://localhost:35729/livereload.js"></script>
 </body>
 </html>

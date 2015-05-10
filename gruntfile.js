@@ -17,7 +17,9 @@ module.exports = function(grunt) {
           'public/js/controllers.js': ['js/controllers.js'],
           'public/js/app.js': ['js/app.js'],
           'public/js/services.js': ['js/services.js'],
-	  'public/event/app.js':['js/event/app.js']
+	  'public/js/event/app.js':['js/event/app.js'],
+	  'public/js/user/app/js':['js/user/app.js'],
+	  'public/js/utils.js':['js/utils.js']
         } //files
       } //my_target
     }, //uglify
@@ -28,7 +30,11 @@ module.exports = function(grunt) {
             cwd    : 'js',
             src    : [
               '**/*.js',
-	      '**/event/*.js'
+	      '**/event/*.js',
+	      '**/user/*.js',
+	      '**/setting/*.js',
+	      '**/auth/*.js',
+	      '**/login/*.js'
             ]
       }
     },
@@ -48,7 +54,7 @@ module.exports = function(grunt) {
     watch: {
       options: { livereload: true },
       scripts: {
-        files: ['js/*.js', 'js/event/*.js'],
+        files: ['js/*.js', 'js/event/*.js','js/user/*.js','js/setting/*.js','js/auth/*.js'],
         //tasks: ['clean','uglify'],
         tasks: ['copy']
       }, //script

@@ -34,6 +34,7 @@ $(document).ready(function(){
     console.log(top);
     console.log($('#rightColumn').offset().top);
     var width = $leftColumn.css('width');
+    console.log(width);
     console.log($(window).width());
     if ($(window).width() > 1024) {
         $(document).on('scroll', function(){
