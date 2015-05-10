@@ -3,7 +3,7 @@
  */
 angular.module('dataService', [])
     .factory('CommonData', function($http, $q){
-        var baseUrl = "http://localhost:4000";
+        var baseUrl = "http://45.55.150.77:4000";
         var url_users = baseUrl + "/users";
         var url_events = baseUrl + "/events";
         var url_pics = baseUrl + "/pics";
