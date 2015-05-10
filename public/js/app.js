@@ -4,13 +4,16 @@ var demoApp = angular.module('demoApp', ['ngRoute', 'demoControllers', 'demoServ
 
 demoApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-    when('/firstview', {
-    templateUrl: 'partials/firstview.html',
-    controller: 'FirstController'
+    when('/login', {
+    templateUrl: 'partials/login-2.html',
+    controller: 'loginController'
   }).
-  when('/secondview', {
-    templateUrl: 'partials/secondview.html',
-    controller: 'SecondController'
+  when('/getUser', {
+    templateUrl: 'partials/user.html',
+    controller: 'profileController',
+    resolve: {
+       loggedin: checkLoggedin
+    }
   }).
   when('/settings', {
     templateUrl: 'partials/settings.html',
@@ -20,10 +23,50 @@ demoApp.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/llamalist.html',
     controller: 'LlamaListController'
   }).
+  when('/llamalist', {
+    templateUrl: 'partials/llamalist.html',
+    controller: 'LlamaListController'
+  }).
   otherwise({
-    redirectTo: '/settings'
+    redirectTo: '/auth/login'
   });
 }]);
+
+demoApp.config(function($locationProvider, $httpProvider){
+    var checkLoggedin = function($q, $timeout, $http, $location,$rootScope){
+        //initialize a new promise
+        var deferred = $q.defer();
+
+        //Make an AJAX call to check if the user is logged in
+        $http.get('/getUser').success(function(user){
+            //authenticated
+            if (user)
+                deferred.resolve();
+            //not authenticated
+            else {
+                $rootScope.message = "You need to log in";
+                deferred.reject();
+                $location.url('/login')
+            }
+        });
+        return deferred.promise;
+    };
+
+   /* $httpProvider.interceptors.push(function($q, $location){
+        return {
+            response: function(response){
+                //do something on success
+                return response;
+            },
+            responseError: function(respose){
+                if (response.status === 401)
+                    $location.url('/login');
+                return $q.reject(response);
+            }
+        };
+    });*/
+})
+
 
 $(document).ready(function(){
     $(document).foundation();

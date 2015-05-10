@@ -15,14 +15,16 @@ http://www.templatemo.com/preview/templatemo_406_flex
 -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
         
-        <link rel="stylesheet" href="./css/login/bootstrap.min.css">
-        <link rel="stylesheet" href="./css/login/loginStyle.css">
-        <link rel="stylesheet" href="./css/login/font-awesome.css">
-        <link rel="stylesheet" href="./css/login/animate.css">
-        <link rel="stylesheet" href="./css/login/templatemo_misc.css">
-        <link rel="stylesheet" href="./css/login/templatemo_style.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/font-awesome.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/templatemo_misc.css">
+        <link rel="stylesheet" href="css/templatemo_style.css">
         <!--<link rel="stylesheet" href="./foundation/css/foundation.css">-->
 
+        <script src="https://apis.google.com/js/client:platform.js" async defer></script>
+        <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -72,10 +74,10 @@ http://www.templatemo.com/preview/templatemo_406_flex
                         <ul class="slides">
                             <li>
                                 <div class="overlay"></div>
-                                <img src="./css/images/frauenlauf.jpg" alt="">
+                                <img src="images/frauenlauf.jpg" alt="">
                                 <div class="slider-caption visible-md visible-lg">
-                                    <form ng-submit="login()">
-                                        <div class="login">
+                                    <div class="login">
+                                       <form ng-submit="login()">
                                             <input type="email" placeholder="email" name="email" ng-model="user.email"><br>
                                             <input type="password" placeholder="password" name="password" ng-model = "user.password"><br>
                                             <input type="button" value="Login">
@@ -91,8 +93,9 @@ http://www.templatemo.com/preview/templatemo_406_flex
                                                     data-scope="https://www.googleapis.com/auth/plus.login">
                                                 </span>
                                             </span>-->
-                                        </div>
-                                    </form>
+                                        </form>
+
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -151,6 +154,16 @@ http://www.templatemo.com/preview/templatemo_406_flex
                                             <input required="" id="passwordinput" name="passwordinput" class="form-control" type="password" placeholder="password" class="input-medium"><br>
                                         </div>
                                     </div>
+                                        <span id="signinButton">
+                                            <span
+                                                    class="g-signin"
+                                                    data-callback="signinCallback"
+                                                    data-clientid="CLIENT_ID"
+                                                    data-cookiepolicy="single_host_origin"
+                                                    data-requestvisibleactions="http://schema.org/AddAction"
+                                                    data-scope="https://www.googleapis.com/auth/plus.login">
+                                            </span>
+                                        </span>
                                 </fieldset>
                             </form>
                         </div>
@@ -163,10 +176,34 @@ http://www.templatemo.com/preview/templatemo_406_flex
             </div>
         </div>
         
-        <script src="./lib/jquery-2.1.3.min/index.js"></script>
+        <script src="js/vendor/jquery-1.11.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
-        <script src="./js/login/bootstrap.js"></script>
-        <script src="./js/login/plugins.js"></script>
-        <script src="./js/login/main.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+
+        <!-- Google Map -->
+        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script src="js/vendor/jquery.gmap3.min.js"></script>
+        
+        <!-- Google Map Init-->
+        <script type="text/javascript">
+            jQuery(function($){
+                $('#map_canvas').gmap3({
+                    marker:{
+                        address: '16.8496189,96.1288854' 
+                    },
+                        map:{
+                        options:{
+                        zoom: 15,
+                        scrollwheel: false,
+                        streetViewControl : true
+                        }
+                    }
+                });
+            });
+        </script>
+        <!-- templatemo 406 flex -->
     </body>
 </html>
