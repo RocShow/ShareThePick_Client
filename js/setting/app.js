@@ -62,16 +62,16 @@ settingApp.controller('changePwd', ['$scope', 'CommonData', function($scope, dat
             utils.alert('#changePasswd', 'Repeat password not match!', 'alert');
             return;
         }
-        dataService.checkPassword(id, $scope.old, function(data){
-            if (data){
-                data.password = $scope.new;
-                dataService.updateUser(data._id, data, function(data1, status){
+        dataService.getUser(id, function(user){
+            if (user.data){
+                user.data.newPassword = $scope.new;
+                dataService.updateUser(id, user.data, function(data1, status){
                     if (status >= 200 && status < 300) {
                         utils.alert('#changePasswd', 'Password has been changed!', 'success');
+                    } else {
+                        utils.alert('#changePasswd', 'Old Password not correct!', 'alert');
                     }
                 });
-            } else {
-                utils.alert('#changePasswd', 'Old Password not correct!', 'alert');
             }
         });
     };
@@ -108,13 +108,17 @@ settingApp.controller('changeInfo', ['$scope', 'CommonData', 'Upload', '$locatio
     }
 
     $scope.update = function(){
-        buffer.description = $scope.data.description;
-        dataService.updateUser(id, buffer, function(ret,status){
-            if (status >= 200 && status < 300){
-                utils.alert('#changePersonalInfo', 'Successfully updated!', 'success');
-                window.location.reload();
-            } else {
-                utils.alert('#changePersonalInfo', ret.message, 'alert');
+        dataService.getUser(id, function(old){
+            if (old.data){
+                old.data.description = $scop.description;
+                dataService.updateUser(id, old.data, function(ret,status){
+                    if (status >= 200 && status < 300){
+                        utils.alert('#changePersonalInfo', 'Successfully updated!', 'success');
+                        window.location.reload();
+                    } else {
+                        utils.alert('#changePersonalInfo', ret.message, 'alert');
+                    }
+                });
             }
         });
     };
