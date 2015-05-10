@@ -61,4 +61,8 @@ loginApp.controller('login', ['$rootScope', '$scope', '$location', 'CommonData',
             }
         });
     };
+
+    $scope.aboutus = function(){
+        $('#aboutUs').foundation('reveal', 'open');
+    };
 }]);

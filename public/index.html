@@ -32,6 +32,10 @@
             <li><a class="button radius small alert" ng-click="signin()">Login</a></li>
             <li><a class="button radius small alert" ng-click="showSignUp()">Sign up</a></li>
         </ul>
+        <div class="row" style="text-align: center; padding-top: 40px;">
+            <a class="button radius small alert" ng-click="aboutus()">About Us</a>
+        </div>
+
     </div>
 </section>
 
@@ -54,6 +58,21 @@
                 <input type="password" placeholder="Repeat your password" ng-model="pwdRepeat"/>
             </label>
             <a class="button radius alert expand" ng-click="signup()">Submit</a>
+        </div>
+    </div>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
+<div id="aboutUs" class="reveal-modal small" data-reveal aria-labelledby="Sign Up" aria-hidden="true" role="dialog">
+    <div class="row" style="margin-top: 40px;">
+        <div class="columns small-12 text-center">
+            ShareThePik allows users to create events, invite other users to those events where everyone has the ownership of the event and can upload and share pictures to that event. ShareThePik is focused on providing a platform for event based image sharing where multiple users assume the ownership of the uploaded event specific images.
+            <br/><br/>
+            By: <br/>
+            Xiupeng Ma (xma33) <br />
+            Abhishek Harish (harish2) <br/>
+            Chen Zhang (czhang49) <br />
+            Kathryn Garbacz (kgarbac2)
         </div>
     </div>
     <a class="close-reveal-modal" aria-label="Close">&#215;</a>

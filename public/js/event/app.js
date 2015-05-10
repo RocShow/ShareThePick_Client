@@ -231,7 +231,7 @@ userApp.controller('event', ['$scope','CommonData', 'Upload','$http','$q', funct
             var p = data.results[0].geometry.location
             var latlng = new google.maps.LatLng(p.lat, p.lng);
             var myOptions = {
-                zoom: 3,
+                zoom: 15,
                 center: latlng,
             };
             map = new google.maps.Map($('#map-canvas')[0], myOptions);
