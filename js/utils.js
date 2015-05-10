@@ -23,7 +23,7 @@ var utils = {
         return query_string;
     },
     redirectLogin: function(){
-        location.href = "./login.html";
+        location.href = "./index.html";
     },
     alert: function(id, message, type){
         $(id).append('<div data-alert class="alert-box ' + type + ' radius">' + message + '<a href="#" class="close">&times;</a> </div>');

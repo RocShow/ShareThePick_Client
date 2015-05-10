@@ -276,13 +276,13 @@ userApp.controller('event', ['$scope','CommonData', 'Upload','$http','$q', funct
     }
 
     function updateUserPhotoCount(val){
-        dataService.getMyInfo(function(data, status){
-            if (status >= 200 && status < 300 && data) {
-                console.log(data.number_photo);
-                data.number_photo += val;
-                console.log(data.number_photo);
-                dataService.updateUser(data._id,data,function(){});
-            }
+        dataService.getMyInfo(function(myinfo){
+            dataService.getUser(myinfo._id, function(data, status){
+                if (status >= 200 && status < 300 && data) {
+                    data.number_photo += val;
+                    dataService.updateUser(data._id,data,function(){});
+                }
+            });
         });
     }
 

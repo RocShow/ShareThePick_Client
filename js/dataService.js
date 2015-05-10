@@ -159,9 +159,9 @@ angular.module('dataService', [])
                 ret.getEventByUserId(id, function(events){
                     if (events && events.data) {
                         events.data.forEach(function(event){
-                            event.list_user_id.forEach(function(id){
-                                if (f.indexOf(id) == -1) {
-                                    f.push(id);
+                            event.list_user_id.forEach(function(id1){
+                                if (f.indexOf(id1) == -1 && id1 != id) {
+                                    f.push(id1);
                                 }
                             });
                         });
